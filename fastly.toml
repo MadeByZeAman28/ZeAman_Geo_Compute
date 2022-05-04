@@ -1,0 +1,6 @@
+manifest_version = 2
+name = "ZeAman Compute@Edge"
+description = "ZeAman Compute@Edge GeoLocation API"
+authors = ["MadeByZeAmanuel28@gmail.com"]
+language = "javascript"
+service_id = "1EYJmZwvyX1QRuKj1dVlUl"
