@@ -1,4 +1,4 @@
-export function HTML(innerHTML: string) {
+export function HTML(innerHTML: string CssStyles: string) {
   return /*html*/ `
     <!DOCTYPE html>
     <html lang="en">
@@ -28,7 +28,9 @@ export function HTML(innerHTML: string) {
           property="og:image"
           content="https://res.cloudinary.com/wedaseha-assets/image/upload/v1651343036/Others/Fastly_CDN_512.png"
         />
-        <link rel="stylesheet" href="/styles.css">
+        <style>
+          ${CssStyles}
+        </style>
       </head>
       <body>
         <article>
