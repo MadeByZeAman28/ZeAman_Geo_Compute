@@ -1,4 +1,4 @@
-export function HTML(innerHTML: string CssStyles: string) {
+export function HTML(innerHTML: string, CssStyles: string) {
   return /*html*/ `
     <!DOCTYPE html>
     <html lang="en">
