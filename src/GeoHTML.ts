@@ -34,7 +34,7 @@ export function HTML(innerHTML: string CssStyles: string) {
       </head>
       <body>
         <article>
-          <h1 class="mb-4 md:mb-6">Geolocation API</h1>
+          <h1 class="mb-4 md:mb-6">Geolocation Explorer</h1>
           <p>
             You now have access to your GeoLocation data from where you are
             visiting these website.
@@ -68,14 +68,14 @@ export function HTML(innerHTML: string CssStyles: string) {
           </p>
         </section>
 
-        <style id="delayed"></style>
+        <!-- <style id="delayed"></style>
         <script type="module">
           window.addEventListener("load", () => {
             const delayed = document.getElementById("delayed");
 
             delayed.innerHTML = '@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");';
           });
-        </script>
+        </script> -->
       </body>
     </html>
   `;
