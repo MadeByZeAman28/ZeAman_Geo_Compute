@@ -1,8 +1,8 @@
 import { HTML } from './GeoHTML';
 
 addEventListener('fetch', (event) => { 
-  return event.respondWith(handleRequest(event)));
-}
+  return event.respondWith(handleRequest(event));
+});
 
 async function handleRequest({ request, client }: FetchEvent) {
   if (!['HEAD', 'GET'].includes(request.method)) {
