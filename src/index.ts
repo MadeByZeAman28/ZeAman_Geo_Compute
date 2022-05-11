@@ -1,11 +1,11 @@
 import { HTML } from './GeoHTML';
 
-addEventListener('fetch', (event) => event.respondWith(handleRequest(event)));
+addEventListener('fetch', (event) => { 
+  return event.respondWith(handleRequest(event)));
+}
 
-async function handleRequest(event: FetchEvent) {
-  const req = event.request;
-
-  if (!['HEAD', 'GET'].includes(req.method)) {
+async function handleRequest({ request, client }: FetchEvent) {
+  if (!['HEAD', 'GET'].includes(request.method)) {
     return new Response('This method is not allowed', {
       status: 405,
     });
@@ -14,10 +14,10 @@ async function handleRequest(event: FetchEvent) {
   const fastly_region = fastly.env.get('FASTLY_REGION');
   const fastly_pop = fastly.env.get('FASTLY_POP');
 
-  const url = new URL(req.url);
+  const url = new URL(request.url);
 
   if (url.pathname == '/') {
-    const clientGeo = event.client.geo;
+    const clientGeo = client.geo;
 
     const FilesDictionary = new Dictionary('files');
     const cssStyles = FilesDictionary.get('styles.css');
@@ -40,6 +40,20 @@ async function handleRequest(event: FetchEvent) {
       },
     });
   }
+
+  if (url.pathname == '/json') {
+    const clientGeo = client.geo;
+
+    return new Response(JSON.stringify(clientGeo, null, 2), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'X-Region': fastly_region,
+        'X-Pop-Code': fastly_pop,
+      },
+    });
+  }
+
 
   return new Response('The page you requested could not be found', {
     status: 404,
