@@ -13,10 +13,10 @@ export function HTML(innerHTML: string, CssStyles: string) {
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://zeaman.edgecompute.app" />
         <meta property="og:title" content="ZeAmanuel Compute@Edge" />
-        <meta property="og:description" content="ZeAmanuel Compute@Edge Geolocation API" />
+        <meta property="og:description" content="ZeAmanuel Compute@Edge Geolocation Explorer" />
         <meta
           property="og:image"
-          content="https://res.cloudinary.com/wedaseha-assets/image/upload/v1651343036/Others/Fastly_CDN_512.png"
+          content="https://res.cloudinary.com/zeaman-contents/image/upload/v1652384379/logos/compute_edge_512.png"
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@amanuel_tigistu" />
@@ -26,7 +26,7 @@ export function HTML(innerHTML: string, CssStyles: string) {
         <meta property="og:description" content="ZeAmanuel Compute@Edge Geolocation API" />
         <meta
           property="og:image"
-          content="https://res.cloudinary.com/wedaseha-assets/image/upload/v1651343036/Others/Fastly_CDN_512.png"
+          content="https://res.cloudinary.com/zeaman-contents/image/upload/v1652384379/logos/compute_edge_512.png"
         />
         <style>
           ${CssStyles}
