@@ -16,7 +16,7 @@ export function HTML(innerHTML: string, CssStyles: string) {
         <meta property="og:description" content="ZeAmanuel Compute@Edge Geolocation Explorer" />
         <meta
           property="og:image"
-          content="https://res.cloudinary.com/zeaman-contents/image/upload/v1652384379/logos/compute_edge_512.png"
+          content="https://res.cloudinary.com/zeaman-contents/image/upload/v1654957594/logos/compute_edge_white.jpg"
         />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@amanuel_tigistu" />
@@ -26,7 +26,7 @@ export function HTML(innerHTML: string, CssStyles: string) {
         <meta property="og:description" content="ZeAmanuel Compute@Edge Geolocation API" />
         <meta
           property="og:image"
-          content="https://res.cloudinary.com/zeaman-contents/image/upload/v1652384379/logos/compute_edge_512.png"
+          content="https://res.cloudinary.com/zeaman-contents/image/upload/v1654957594/logos/compute_edge_white.jpg"
         />
         <style>
           ${CssStyles}
