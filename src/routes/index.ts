@@ -3,7 +3,7 @@ import { reply } from "worktop/response";
 import { HTML } from './GeoHTML';
 
 export const IndexGet: Handler = async (request, context) => {
-  const clientGeo = client.geo;
+  const clientGeo = context?.client?.geo;
 
   const FilesDictionary = new Dictionary('files');
   const cssStyles = FilesDictionary.get('styles.css');
