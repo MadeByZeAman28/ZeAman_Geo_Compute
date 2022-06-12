@@ -43,8 +43,9 @@ async function handleRequest({ request, client }: FetchEvent) {
 
   if (url.pathname == '/json') {
     const clientGeo = client.geo;
+    const clientIP = client.ip;
 
-    return new Response(JSON.stringify(clientGeo, null, 2), {
+    return new Response(JSON.stringify({ geo: clientGeo, ip: clientIP }, null, 2), {
       status: 200,
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
