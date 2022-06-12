@@ -8,7 +8,7 @@ export const IndexGet: Handler = async (request, context) => {
 
   const headers = {
     "content-type": "text/html",
-    'X-Region': fastly_region',
+    'X-Region': fastly_region,
     'X-Pop-Code': fastly_pop
   }
 
