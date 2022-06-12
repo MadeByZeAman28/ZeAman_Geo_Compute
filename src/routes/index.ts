@@ -3,6 +3,10 @@ import { reply } from "worktop/response";
 import { HTML } from '../GeoHTML';
 
 export const IndexGet: Handler = async (request, context) => {
+  const headers = {
+    "content-type": "text/plain"
+  }
+
   const clientGeo = context?.client?.geo;
 
   const FilesDictionary = new Dictionary('files');
@@ -17,5 +21,5 @@ export const IndexGet: Handler = async (request, context) => {
   html_content += '<h2> Longitude: ' + clientGeo.longitude + '</h2>';
   html_content += '<h2> Region: ' + clientGeo.region + '</h2>';
 
-  return reply(200, HTML(html_content, cssStyles));
+  return reply(200, HTML(html_content, cssStyles), headers);
 }
