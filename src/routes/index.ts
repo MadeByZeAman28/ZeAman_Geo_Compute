@@ -1,6 +1,6 @@
 import { Handler } from "worktop";
 import { reply } from "worktop/response";
-import { HTML } from './GeoHTML';
+import { HTML } from '../GeoHTML';
 
 export const IndexGet: Handler = async (request, context) => {
   const clientGeo = context?.client?.geo;
