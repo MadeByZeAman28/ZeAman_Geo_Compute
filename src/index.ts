@@ -2,7 +2,7 @@ import { HTML } from './GeoHTML';
 import cors from 'edge-cors';
 
 addEventListener('fetch', (event) => { 
-  return event.respondWith(handleRequest(event));
+  return event.respondWith(cors(event.request, handleRequest(event)));
 });
 
 async function handleRequest({ request, client }: FetchEvent) {
@@ -46,17 +46,14 @@ async function handleRequest({ request, client }: FetchEvent) {
     const clientGeo = client.geo;
     const clientIP = client?.ip;
 
-    return cors(
-      request,
-      new Response(JSON.stringify({ ip: clientIP, geo: clientGeo }, null, 2), {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-          'X-Region': fastly_region,
-          'X-Pop-Code': fastly_pop,
-        },
-      })
-    );
+    return new Response(JSON.stringify({ ip: clientIP, geo: clientGeo }, null, 2), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+        'X-Region': fastly_region,
+        'X-Pop-Code': fastly_pop,
+      },
+    });
   }
 
 
