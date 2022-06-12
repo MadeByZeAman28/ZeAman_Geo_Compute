@@ -4,7 +4,7 @@ import { HTML } from '../GeoHTML';
 
 export const IndexGet: Handler = async (request, context) => {
   const headers = {
-    "content-type": "text/plain"
+    "content-type": "text/html"
   }
 
   const clientGeo = context?.client?.geo;
