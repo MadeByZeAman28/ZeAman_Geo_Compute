@@ -2,14 +2,17 @@ import { HTML } from './GeoHTML';
 import cors from 'edge-cors';
 
 addEventListener('fetch', (event) => { 
-  return event.respondWith(cors(event.request, handleRequest(event)));
+  return event.respondWith(handleRequest(event));
 });
 
 async function handleRequest({ request, client }: FetchEvent) {
   if (!['HEAD', 'GET'].includes(request.method)) {
-    return new Response('This method is not allowed', {
-      status: 405,
-    });
+    return cors(
+      request, 
+      new Response('This method is not Allowed!', {
+        status: 405,
+      })
+    );
   }
 
   const fastly_region = fastly.env.get('FASTLY_REGION');
@@ -44,20 +47,25 @@ async function handleRequest({ request, client }: FetchEvent) {
 
   if (url.pathname == '/json') {
     const clientGeo = client.geo;
-    const clientIP = client?.ip;
 
-    return new Response(JSON.stringify({ ip: clientIP, geo: clientGeo }, null, 2), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json; charset=utf-8',
-        'X-Region': fastly_region,
-        'X-Pop-Code': fastly_pop,
-      },
-    });
+    return cors(
+      request,
+      new Response(JSON.stringify(clientGeo, null, 2), {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json; charset=utf-8',
+          'X-Region': fastly_region,
+          'X-Pop-Code': fastly_pop,
+        },
+      })
+    );
   }
 
 
-  return new Response('The page you requested could not be found', {
-    status: 404,
-  });
+  return cors(
+    request,
+    new Response('The page you requested could not be found', {
+      status: 404,
+    })
+  );
 }
