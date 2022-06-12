@@ -13,7 +13,7 @@ router.prepare = compose(
     });
   },
   preflight({
-    origin: "*",
+    origin: ["*"],
     headers: [
       "Cache-Control",
       "Content-Type",
