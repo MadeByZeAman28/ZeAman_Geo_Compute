@@ -12,5 +12,5 @@ export const geoJson: Handler = async (request, context) => {
 
   const clientGeo = context?.client?.geo;
 
-  return reply(200, clientGeo, headers);
+  return reply(200, JSON.stringify(clientGeo, null, 2), headers);
 }
