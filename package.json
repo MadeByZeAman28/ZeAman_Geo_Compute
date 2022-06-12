@@ -10,7 +10,8 @@
     "esbuild": "^0.14.38"
   },
   "dependencies": {
-    "@fastly/js-compute": "^0.2.4"
+    "@fastly/js-compute": "^0.2.4",
+    "edge-cors": "^0.2.1"
   },
   "scripts": {
     "bundle": "esbuild src/index.ts --bundle --minify --platform=node --target=es2020,chrome90 --loader:.html=text --outfile=bin/index.js",
