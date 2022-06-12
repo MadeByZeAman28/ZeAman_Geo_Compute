@@ -13,7 +13,7 @@ router.prepare = compose(
     });
   },
   preflight({
-    origin: ["https://wedaseha.pages.dev"],
+    origin: "*",
     headers: [
       "Cache-Control",
       "Content-Type",
