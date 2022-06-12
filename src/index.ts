@@ -1,71 +1,29 @@
-import { HTML } from './GeoHTML';
-import cors from 'edge-cors';
+import { compose } from "worktop";
+import { start } from "worktop/sw";
+import { preflight } from "worktop/cors";
 
-addEventListener('fetch', (event) => { 
-  return event.respondWith(handleRequest(event));
-});
+import { router } from "./router";
 
-async function handleRequest({ request, client }: FetchEvent) {
-  if (!['HEAD', 'GET'].includes(request.method)) {
-    return cors(
-      request, 
-      new Response('This method is not Allowed!', {
-        status: 405,
-      })
-    );
-  }
-
-  const fastly_region = fastly.env.get('FASTLY_REGION');
-  const fastly_pop = fastly.env.get('FASTLY_POP');
-
-  const url = new URL(request.url);
-
-  if (url.pathname == '/') {
-    const clientGeo = client.geo;
-
-    const FilesDictionary = new Dictionary('files');
-    const cssStyles = FilesDictionary.get('styles.css');
-
-    let html_content = '';
-
-    html_content += '<h2> Country: ' + clientGeo.country_name?.toUpperCase() + '</h2>';
-    html_content += '<h2> City: ' + clientGeo.city?.toUpperCase() + '</h2>';
-    html_content += '<h2> Continent: ' + clientGeo.continent?.toUpperCase() + '</h2>';
-    html_content += '<h2> Latitude: ' + clientGeo.latitude + '</h2>';
-    html_content += '<h2> Longitude: ' + clientGeo.longitude + '</h2>';
-    html_content += '<h2> Region: ' + clientGeo.region + '</h2>';
-
-    return new Response(HTML(html_content, cssStyles), {
-      status: 200,
-      headers: {
-	'Content-Type': 'text/html; charset=utf-8',
-	'X-Region': fastly_region,
-	'X-Pop-Code': fastly_pop,
-      },
+router.prepare = compose(
+  function (_req, context) {
+    context.start = Date.now();
+    context.defer((res) => {
+      const ms = Date.now() - context.start!;
+      res.headers.set("x-response-time", `${ms} ms`);
     });
-  }
+  },
+  preflight({
+    origin: ["https://wedaseha.pages.dev"],
+    headers: [
+      "Cache-Control",
+      "Content-Type",
+      "x-served-by",
+      "date",
+      "x-response-time",
+    ],
+    methods: ["GET", "HEAD", "OPTIONS"],
+    maxage: 604800,
+  })
+);
 
-  if (url.pathname == '/json') {
-    const clientGeo = client.geo;
-
-    return cors(
-      request,
-      new Response(JSON.stringify(clientGeo, null, 2), {
-        status: 200,
-        headers: {
-          'Content-Type': 'application/json; charset=utf-8',
-          'X-Region': fastly_region,
-          'X-Pop-Code': fastly_pop,
-        },
-      })
-    );
-  }
-
-
-  return cors(
-    request,
-    new Response('The page you requested could not be found', {
-      status: 404,
-    })
-  );
-}
+start(router.run);
