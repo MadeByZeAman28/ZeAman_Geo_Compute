@@ -6,7 +6,6 @@ export const geoJson: Handler = async (request, context) => {
   const fastly_pop = fastly.env.get('FASTLY_POP');
 
   const headers = {
-    "content-type": "text/html",
     'X-Region': fastly_region',
     'X-Pop-Code': fastly_pop
   }
